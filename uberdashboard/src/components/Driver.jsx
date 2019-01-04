@@ -12,7 +12,8 @@ class Driver extends Component {
       .get(`http://192.168.11.98:8000/api/dashboard/driver/list/`)
       .then(res => {
         const drivers = res.data;
-        this.setState({ drivers });
+        this.setState({ drivers: this.state.drivers.concat(drivers) });
+        // this.setState({ drivers });
         console.log(drivers);
       });
   }
@@ -21,11 +22,11 @@ class Driver extends Component {
       <div>
         <h2>
           Hello
-          {/* <ul>
-            {this.state.drivers.map(driver => (
-              <li>{driver.first_name}</li>
-            ))}
-          </ul> */}
+          <ul>
+            {this.state.drivers.map(function(driver, key) {
+              return <li key={key}> {driver.first_name}</li>;
+            })}
+          </ul>
         </h2>
       </div>
     );
